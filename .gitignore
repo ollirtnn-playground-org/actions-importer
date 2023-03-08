@@ -1,2 +1,4 @@
 .env.local
 .cache/
+tmp/dry-run/log
+tmp/forecast/log

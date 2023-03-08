@@ -1,0 +1,26 @@
+name: gh-importer-labs/pipelines/custom-transformer-example
+on:
+  push:
+    branches:
+    - "*"
+env:
+  BUILDCONFIGURATION: Debug
+  BuildParameters_RESTOREBUILDPROJECTS: "**/*.csproj"
+jobs:
+  Job_1:
+    name: Agent job 1
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.3.0
+    - name: Use Node 10.16.3
+      uses: actions/setup-node@v3.6.0
+      with:
+        node-version: 10.16.3
+    - name: Restore
+      run: shopt -s globstar; for f in ./**/*.csproj; do dotnet restore $f  ; done
+      shell: bash
+    - name: Build
+      run: shopt -s globstar; for f in ./**/*.csproj; do dotnet build $f --configuration ${{ env.BUILDCONFIGURATION }} ; done
+      shell: bash
