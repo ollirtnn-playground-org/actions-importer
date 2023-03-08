@@ -1,0 +1,56 @@
+# Logfile created on 2023-03-08 07:38:19 +0000 by logger.rb/v1.5.3
+I, [2023-03-08T07:38:19.936001 #1]  INFO -- : Using GitHub Features: 'all'
+I, [2023-03-08T07:38:19.936053 #1]  INFO -- : Auditing 'https://dev.azure.com/ghes-demo/gh-importer-labs/_build'
+I, [2023-03-08T07:38:19.944583 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/build/definitions?api-version=5.0&includeAllProperties=true&queryOrder=lastModifiedDescending
+I, [2023-03-08T07:38:20.875443 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:20.876427 #1]  INFO -- : Thread collection size: 4
+I, [2023-03-08T07:38:20.880612 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/git/repositories/gh-importer-labs/items?api-version=5.0-preview&path=%2Fpipelines%2Fyml%2Fpipeline2.yml&versionDescriptor.version=main
+I, [2023-03-08T07:38:20.881937 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/git/repositories/gh-importer-labs/items?api-version=5.0-preview&path=%2Fpipelines%2Fyml%2Fpipeline1.yml&versionDescriptor.version=main
+I, [2023-03-08T07:38:20.915840 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/git/repositories/gh-importer-labs/items?api-version=5.0-preview&path=%2Fpipelines%2Fyml%2Fcustom-transformer-example.yml&versionDescriptor.version=main
+I, [2023-03-08T07:38:21.203491 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:21.229643 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/serviceendpoint/endpoints?api-version=5.0-preview
+I, [2023-03-08T07:38:21.269837 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:21.270813 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/distributedtask/variablegroups?api-version=5.0-preview&queryOrder=idDescending
+I, [2023-03-08T07:38:21.333537 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:21.334498 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/distributedtask/variablegroups?api-version=5.0-preview&queryOrder=idDescending
+I, [2023-03-08T07:38:21.411846 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:21.412807 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/distributedtask/variablegroups?api-version=5.0-preview&queryOrder=idDescending
+I, [2023-03-08T07:38:21.674536 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:21.675608 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/distributedtask/taskgroups?api-version=5.0-preview
+I, [2023-03-08T07:38:21.816892 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:21.817938 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/distributedtask/taskgroups?api-version=5.0-preview
+I, [2023-03-08T07:38:21.820504 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:21.821555 #1]  INFO -- request: GET https://dev.azure.com/ghes-demo/gh-importer-labs/_apis/distributedtask/taskgroups?api-version=5.0-preview
+I, [2023-03-08T07:38:22.014703 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:22.105972 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:22.241130 #1]  INFO -- response: Status 200
+I, [2023-03-08T07:38:22.242946 #1]  INFO -- request: GET https://vsrm.dev.azure.com/ghes-demo/gh-importer-labs/_apis/release/definitions?api-version=5.0&queryOrder=idDescending
+I, [2023-03-08T07:38:23.888056 #1]  INFO -- response: Status 200
+D, [2023-03-08T07:38:23.892136 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::Steps]: Located transformer for 'script'
+D, [2023-03-08T07:38:23.892469 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::Steps]: Located transformer for 'script'
+D, [2023-03-08T07:38:23.893249 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::On]: Located transformer for 'continuousIntegration'
+D, [2023-03-08T07:38:23.927138 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::Steps]: Located transformer for 'script'
+D, [2023-03-08T07:38:23.927420 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::Steps]: Located transformer for 'script'
+D, [2023-03-08T07:38:23.927753 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::On]: Located transformer for 'continuousIntegration'
+D, [2023-03-08T07:38:23.963689 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::Steps]: Located transformer for 'checkout'
+D, [2023-03-08T07:38:23.963942 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::Steps]: Located transformer for 'NodeTool@0'
+D, [2023-03-08T07:38:23.964481 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::Steps]: Located transformer for 'DotNetCoreCLI@2'
+D, [2023-03-08T07:38:23.964841 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::Steps]: Located transformer for 'DotNetCoreCLI@2'
+D, [2023-03-08T07:38:23.965715 #1] DEBUG -- : [Transformers::AzureDevops::Pipeline::On]: Located transformer for 'continuousIntegration'
+I, [2023-03-08T07:38:24.011785 #1]  INFO -- : Output file(s):
+I, [2023-03-08T07:38:24.014114 #1]  INFO -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline2/.github/workflows/pipeline2.yml
+I, [2023-03-08T07:38:24.014310 #1]  INFO -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline2/config.json
+I, [2023-03-08T07:38:24.014465 #1]  INFO -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline2/source.yml
+I, [2023-03-08T07:38:24.016102 #1]  INFO -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline1/.github/workflows/pipeline1.yml
+I, [2023-03-08T07:38:24.016293 #1]  INFO -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline1/config.json
+I, [2023-03-08T07:38:24.016459 #1]  INFO -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline1/source.yml
+I, [2023-03-08T07:38:24.019314 #1]  INFO -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/custom-transformer-example/.github/workflows/custom-transformer-example.yml
+I, [2023-03-08T07:38:24.019499 #1]  INFO -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/custom-transformer-example/config.json
+I, [2023-03-08T07:38:24.019687 #1]  INFO -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/custom-transformer-example/source.yml
+I, [2023-03-08T07:38:24.029181 #1]  INFO -- :   tmp/audit/workflow_usage.csv
+I, [2023-03-08T07:38:24.034445 #1]  INFO -- :   tmp/audit/audit_summary.md
+W, [2023-03-08T07:38:24.715422 #1]  WARN -- : Secrets redacted in file(s):
+W, [2023-03-08T07:38:24.715767 #1]  WARN -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/custom-transformer-example/config.json
+W, [2023-03-08T07:38:24.715949 #1]  WARN -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline1/config.json
+W, [2023-03-08T07:38:24.716130 #1]  WARN -- :   tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline2/config.json
+I, [2023-03-08T07:38:24.719727 #1]  INFO -- : Sending telemetry with transaction id '0b429c0c-b085-4a06-b22b-98b85f10afbc'

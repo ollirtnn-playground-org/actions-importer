@@ -1,0 +1,12 @@
+Pipeline,Action,File path
+gh-importer-labs/pipelines/pipeline2,actions/checkout@v3.3.0,tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline2/.github/workflows/pipeline2.yml
+gh-importer-labs/pipelines/pipeline1,actions/checkout@v3.3.0,tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline1/.github/workflows/pipeline1.yml
+gh-importer-labs/pipelines/custom-transformer-example,actions/checkout@v3.3.0,tmp/audit/pipelines/gh-importer-labs/pipelines/custom-transformer-example/.github/workflows/custom-transformer-example.yml
+gh-importer-labs/pipelines/custom-transformer-example,actions/setup-node@v3.6.0,tmp/audit/pipelines/gh-importer-labs/pipelines/custom-transformer-example/.github/workflows/custom-transformer-example.yml
+
+Pipeline,Secret,File path
+
+
+Pipeline,Runner,File path
+gh-importer-labs/pipelines/pipeline2,mechamachine,tmp/audit/pipelines/gh-importer-labs/pipelines/pipeline2/.github/workflows/pipeline2.yml
+gh-importer-labs/pipelines/custom-transformer-example,mechamachine,tmp/audit/pipelines/gh-importer-labs/pipelines/custom-transformer-example/.github/workflows/custom-transformer-example.yml

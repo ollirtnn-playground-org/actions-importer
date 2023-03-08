@@ -1,0 +1,12 @@
+---
+trigger:
+- main
+pool:
+  vmImage: windows-latest
+steps:
+- script: echo Hello, I am pipeline 1!
+  displayName: Run a one-line script
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: Run a multi-line script

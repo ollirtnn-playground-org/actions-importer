@@ -1,0 +1,100 @@
+{
+  "triggers": [
+    {
+      "branchFilters": [
+        "+*"
+      ],
+      "pathFilters": [
+
+      ],
+      "settingsSourceType": 2,
+      "batchChanges": false,
+      "maxConcurrentBuildsPerBranch": 1,
+      "triggerType": "continuousIntegration"
+    }
+  ],
+  "properties": {
+  },
+  "tags": [
+
+  ],
+  "_links": {
+    "self": {
+      "href": "https://dev.azure.com/ghes-demo/c31fc73c-f8b9-4d9d-92bc-4d213707a573/_apis/build/Definitions/2?revision=1"
+    },
+    "web": {
+      "href": "https://dev.azure.com/ghes-demo/c31fc73c-f8b9-4d9d-92bc-4d213707a573/_build/definition?definitionId=2"
+    },
+    "editor": {
+      "href": "https://dev.azure.com/ghes-demo/c31fc73c-f8b9-4d9d-92bc-4d213707a573/_build/designer?id=2&_a=edit-build-definition"
+    },
+    "badge": {
+      "href": "https://dev.azure.com/ghes-demo/c31fc73c-f8b9-4d9d-92bc-4d213707a573/_apis/build/status/2"
+    }
+  },
+  "jobAuthorizationScope": "projectCollection",
+  "process": {
+    "yamlFilename": "/pipelines/yml/custom-transformer-example.yml",
+    "type": 2
+  },
+  "repository": {
+    "id": "e06870ee-2711-4f80-a6fc-6a08437671f0",
+    "type": "TfsGit",
+    "name": "gh-importer-labs",
+    "url": "https://dev.azure.com/ghes-demo/gh-importer-labs/_git/gh-importer-labs",
+    "defaultBranch": "refs/heads/main",
+    "clean": null,
+    "checkoutSubmodules": false
+  },
+  "quality": "definition",
+  "authoredBy": {
+    "displayName": "Olli Rautiainen",
+    "url": "https://spsprodweu5.vssps.visualstudio.com/A8bdf7eaf-2975-4f0f-8a59-7046bb28fba0/_apis/Identities/de2db44e-b08d-63a2-85c3-885ed6ce24db",
+    "_links": {
+      "avatar": {
+        "href": "https://dev.azure.com/ghes-demo/_apis/GraphProfile/MemberAvatars/msa.REDACTED"
+      }
+    },
+    "id": "de2db44e-b08d-63a2-85c3-885ed6ce24db",
+    "uniqueName": "ollirtnn@live.com",
+    "imageUrl": "https://dev.azure.com/ghes-demo/_apis/GraphProfile/MemberAvatars/msa.REDACTED",
+    "descriptor": "msa.REDACTED"
+  },
+  "drafts": [
+
+  ],
+  "queue": {
+    "_links": {
+      "self": {
+        "href": "https://dev.azure.com/ghes-demo/_apis/build/Queues/18"
+      }
+    },
+    "id": 18,
+    "name": "Azure Pipelines",
+    "url": "https://dev.azure.com/ghes-demo/_apis/build/Queues/18",
+    "pool": {
+      "id": 9,
+      "name": "Azure Pipelines",
+      "isHosted": true
+    }
+  },
+  "id": 2,
+  "name": "custom-transformer-example",
+  "url": "https://dev.azure.com/ghes-demo/c31fc73c-f8b9-4d9d-92bc-4d213707a573/_apis/build/Definitions/2?revision=1",
+  "uri": "vstfs:///Build/Definition/2",
+  "path": "\\pipelines",
+  "type": "build",
+  "queueStatus": "enabled",
+  "revision": 1,
+  "createdDate": "2023-03-08T06:23:32.79Z",
+  "project": {
+    "id": "c31fc73c-f8b9-4d9d-92bc-4d213707a573",
+    "name": "gh-importer-labs",
+    "description": "Project to be used for GitHub Actions Importer Labs",
+    "url": "https://dev.azure.com/ghes-demo/_apis/projects/c31fc73c-f8b9-4d9d-92bc-4d213707a573",
+    "state": "wellFormed",
+    "revision": 21,
+    "visibility": "private",
+    "lastUpdateTime": "2023-03-08T06:23:28.027Z"
+  }
+}
