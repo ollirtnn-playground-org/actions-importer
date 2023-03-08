@@ -4,3 +4,4 @@ tmp/dry-run/log
 tmp/forecast/log
 tmp/audit/log
 tmp/migrate/log
+tmp/dry-run-2/log/
