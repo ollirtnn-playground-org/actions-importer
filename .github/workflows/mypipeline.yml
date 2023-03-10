@@ -1,0 +1,37 @@
+#create workflow steps
+
+#steps to download and store artifacts to ./tmp folder as zip file
+- name: Download artifacts
+  uses: actions/download-artifact@v2
+  with:
+    name: my-artifact
+    path: ./tmp
+#steps to zip the downloaded artifacts
+- name: Zip artifacts
+  run: zip -r my-artifact.zip ./tmp
+
+#install jfrog cli
+- name: Install JFrog CLI
+  uses: jfrog/setup-jfrog-cli@v1
+  with:
+    version: latest
+    cli_server_id: www.my.artifactory.com
+    cli_server_url: https://www.my.artifactory.com/artifactory
+    cli_user_name: ${{ secrets.ARTIFACTORY_USERNAME }}
+    cli_user_password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+
+#steps to upload my-artifact.zip to jfrog artifactory
+#repo testrepo is created in artifactory
+#server-id www.my.artifactory.com
+#username and password are stored in github secrets
+- name: Upload artifacts to JFrog Artifactory
+  run: jfrog rt u my-artifact.zip testrepo --server-id=www.my.artifactory.com --user=$ARTIFACTORY_USERNAME --password=$ARTIFACTORY_PASSWORD
+#run azure devops template yml file called template1.yml
+#parameters: name: TargetBranch type: string default: '$(Build.SourceBranch)'
+- name: Run Azure DevOps template
+  uses: azure/pipelines@v1
+  with:
+    azure-devops-project: "https://dev.azure.com/myorg"
+    azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+    azure-pipeline-name: "myorg/myproject/my-pipeline"
+    azure-pipeline-parameters: "TargetBranch=$(Build.SourceBranch)"
