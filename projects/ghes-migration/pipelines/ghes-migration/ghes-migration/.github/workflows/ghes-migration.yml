@@ -2,17 +2,23 @@ name: ghes-migration/ghes-migration
 on:
   push:
     branches:
-    - main
+    - none
 env:
   buildConfiguration: Release
   buildPlatform: Any CPU
   solution: "**/*.sln"
 jobs:
   Build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - name: checkout
       uses: actions/checkout@v3.3.0
+#     # This item has no matching transformer
+#     - task: VisualStudioTestPlatformInstaller@1
+#       displayName: Visual Studio Test Platform Installer
+#       inputs:
+#         versionSelector: specificVersion
+#         testPlatformVersion: "${{ env.testPlatformVersion }}"
     - uses: nuget/setup-nuget@v1.1.1
     - run: nuget restore ${{ env.solution }}
     - name: install msbuild
@@ -27,3 +33,35 @@ jobs:
           !**\obj\**
         searchFolder: "${{ github.workspace }}"
         platform: "${{ env.buildPlatform }}"
+#     # This item has no matching transformer
+#     - task: ProjectModifier@13
+#       displayName: ProjectModifier (Sources)
+#       inputs:
+#         PathToEdit: "${{ github.workspace }}\\Sources"
+#         TargetFrameworkVersion: "${{ env.TargetFrameworkVersion }}"
+#         TargetVsVersion: "${{ env.VisualStudioToolsVersion }}"
+#         MakeCheckin: 'False'
+#         ChosenPlatforms: x86,x64,win32
+#         SourceBranch: "${{parameters.TargetBranch}}"
+#         SourceRootDirectory: "${{ github.workspace }}\\"
+#         FileExtensions: "*.shfbproj *.sln *.csproj GlobalAssemblyInfo.cs *.ism *.vsixmanifest module_sw_version.h AssemblyInfo.cs"
+    - name: Generate NuGet.config to Temp directory
+      if: 'false'
+      shell: pwsh
+      run: |-
+        $params = ""C:\Program Files\org\tool\nuget.exe" "${{ runner.temp }}\NuGet.config" ${{ env.artifactoryuser }} ${{ env.agentpassword }}"
+        $scriptBlock = @'
+        param(
+         $nugetExecutablePath,
+         $configPath,
+         $artifactoryuser,
+         $artifactorypassword
+        )
+        @"
+        <?xml version="1.0" encoding="utf-8"?>
+        <configuration/>
+        "@ | Set-Content $configPath
+        & "$nugetExecutablePath" sources add -Name "OrgNugets" -Source "https://artifactory.organization.com:443/artifactory/OrgNugets/" -Config $configPath -username "$artifactoryuser" -password "$artifactorypassword"
+        '@
+        $func = New-Item -Path function: -Name inline_script_$(Get-Random) -Value $scriptBlock
+        Invoke-Expression "$func $params"

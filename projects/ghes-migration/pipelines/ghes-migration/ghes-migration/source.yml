@@ -1,6 +1,6 @@
 ---
 trigger:
-- main
+- none
 pool:
   vmImage: windows-latest
 variables:
@@ -10,6 +10,11 @@ variables:
 jobs:
 - job: Build
   steps:
+  - task: VisualStudioTestPlatformInstaller@1
+    displayName: Visual Studio Test Platform Installer
+    inputs:
+      versionSelector: specificVersion
+      testPlatformVersion: "$(testPlatformVersion)"
   - task: NuGetToolInstaller@1
   - task: NuGetCommand@2
     inputs:
@@ -26,3 +31,35 @@ jobs:
     inputs:
       platform: "$(buildPlatform)"
       configuration: "$(buildConfiguration)"
+  - task: ProjectModifier@13
+    displayName: ProjectModifier (Sources)
+    inputs:
+      PathToEdit: "$(Build.SourcesDirectory)\\Sources"
+      TargetFrameworkVersion: "$(TargetFrameworkVersion)"
+      TargetVsVersion: "$(VisualStudioToolsVersion)"
+      MakeCheckin: 'False'
+      ChosenPlatforms: x86,x64,win32
+      SourceBranch: "${{parameters.TargetBranch}}"
+      SourceRootDirectory: "$(Build.SourcesDirectory)\\"
+      FileExtensions: "*.shfbproj *.sln *.csproj GlobalAssemblyInfo.cs *.ism *.vsixmanifest
+        module_sw_version.h AssemblyInfo.cs"
+  - task: InlinePowershell@1
+    displayName: Generate NuGet.config to Temp directory
+    enabled: false
+    inputs:
+      Script: |
+        param(
+         $nugetExecutablePath,
+         $configPath,
+         $artifactoryuser,
+         $artifactorypassword
+        )
+
+        @"
+        <?xml version="1.0" encoding="utf-8"?>
+        <configuration/>
+        "@ | Set-Content $configPath
+
+        & "$nugetExecutablePath" sources add -Name "OrgNugets" -Source "https://artifactory.organization.com:443/artifactory/OrgNugets/" -Config $configPath -username "$artifactoryuser" -password "$artifactorypassword"
+      ScriptArguments: '"C:\Program Files\org\tool\nuget.exe" "$(Agent.TempDirectory)\NuGet.config"
+        $(artifactoryuser) $(agentpassword)'
