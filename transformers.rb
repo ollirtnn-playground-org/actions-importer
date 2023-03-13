@@ -33,3 +33,14 @@ transform "DotNetCoreCLI@2" do |item|
     shell: "bash",
   }
 end
+
+transform "CheckinFilesRecursiveWithCleanupActions@6" do |item|
+  {
+    run:
+      "[Reflection.Assembly]::LoadFrom("$root\bin\System.Threading.Tasks.Dataflow.dll")",
+      "scripts/checkin-files-recursive.ps1 -SourceFolder #{item['sourceFolder']} -TargetFolder #{item['targetFolder']} -CleanupAction #{item['cleanupAction']}",
+      "$dll = new-object BuildProcessCustomActivitiesVS2017.CheckInFilesAndUpdateCSProject",
+      "$dll.Execute(-SourceFolder #{item['sourceFolder']} -TargetFolder #{item['targetFolder']} -CleanupAction #{item['cleanupAction']}",
+    shell: "pwsh"
+  }
+end

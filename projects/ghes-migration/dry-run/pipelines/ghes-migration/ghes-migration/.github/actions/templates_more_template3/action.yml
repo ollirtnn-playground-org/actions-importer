@@ -1,0 +1,7 @@
+name: templates_more_template3
+runs:
+  using: composite
+  steps:
+  - name: Checkout *.ism files from ...\Installations\Installer
+    run: 'scripts/checkin-files-recursive.ps1 -SourceFolder  -TargetFolder  -CleanupAction '
+    shell: pwsh

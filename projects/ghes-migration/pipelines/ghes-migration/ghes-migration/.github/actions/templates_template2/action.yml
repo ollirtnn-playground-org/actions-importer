@@ -1,0 +1,33 @@
+name: templates_template2
+inputs:
+  TargetBranch:
+    required: false
+    default: "$(Build.SourceBranch)"
+    type: string
+runs:
+  using: composite
+  steps:
+  - name: Generate NuGet.config to Temp directory
+    if: 'false'
+    shell: pwsh
+    run: |-
+      $params = ""C:\Program Files\org\tool\nuget.exe" "${{ runner.temp }}\NuGet.config" ${{ env.artifactoryuser }} ${{ env.agentpassword }}"
+      $scriptBlock = @'
+      param(
+       $nugetExecutablePath,
+       $configPath,
+       $artifactoryuser,
+       $artifactorypassword
+      )
+
+      @"
+      <?xml version="1.0" encoding="utf-8"?>
+      <configuration/>
+      "@ | Set-Content $configPath
+
+      & "$nugetExecutablePath" sources add -Name "OrgNugets" -Source "https://artifactory.organization.com:443/artifactory/OrgNugets/" -Config $configPath -username "$artifactoryuser" -password "$artifactorypassword"
+
+      '@
+      $func = New-Item -Path function: -Name inline_script_$(Get-Random) -Value $scriptBlock
+      Invoke-Expression "$func $params"
+  - uses: "./.github/actions/templates_more_template3"
