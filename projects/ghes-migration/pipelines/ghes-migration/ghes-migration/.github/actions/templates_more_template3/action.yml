@@ -2,13 +2,6 @@ name: templates_more_template3
 runs:
   using: composite
   steps:
-#   # This item has no matching transformer
-#   - task: CheckinFilesRecursiveWithCleanupActions@6
-#     enabled: true
-#     displayName: Checkout *.ism files from ...\Installations\Installer
-#     inputs:
-#       FolderToCheckIn: "${{ github.workspace }}\\Installations\\Installer"
-#       SourceRootDirectory: "${{ github.workspace }}"
-#       FileExtensionsToCheckIn: "'*.ism'"
-#       SourceBranch: "${{ github.ref }}"
-#       MakeCheckIn: false
+  - name: Test myAction
+    run: pwsh -File myAction.ps1 -SourceRootDirectory $SourceRootDirectory -FolderToCheckIn $FolderToCheckIn -FileExtensionsToCheckIn $FileExtensionsToCheckIn -CheckInComment $CheckInComment -MakeCheckIn $MakeCheckIn -SourceBranch $SourceBranch
+    shell: pwsh

@@ -18,7 +18,6 @@ steps:
   inputs:
     versionSelector: specificVersion
     testPlatformVersion: "$(testPlatformVersion)"
-- template: common/do-something.yml
 - "${{ each platform in parameters.platforms }}":
   - template: "../Common/copy-addons.yml"
     parameters:

@@ -1,6 +1,12 @@
 There was an error extracting the Azure DevOps pipeline (https://dev.azure.com/ghes-demo/ghes-migration/_build?definitionId=5)
-Message: Template file common/do-something.yml was empty
-/usr/local/bundle/gems/actions_importer-1.1.16912/lib/valet/services/azure_devops/pipeline/extract_templates.rb:209:in `block (3 levels) in extract_included_files'
+Message: Resource not found
+(GET 404) Not Found: https://dev.azure.com/ghes-demo/ghes-migration/_apis/git/repositories/ghes-migration/items?api-version=5.0-preview&path=..%2FCommon%2Fcopy-addons.yml&versionDescriptor.version=main
+/usr/local/bundle/gems/actions_importer-1.1.16912/lib/valet/services/azure_devops/parse_response.rb:16:in `parse!'
+/usr/local/bundle/gems/actions_importer-1.1.16912/lib/valet/adapters/azure_devops/client.rb:92:in `fetch_file'
+/usr/local/bundle/gems/actions_importer-1.1.16912/lib/valet/services/azure_devops/extract_file.rb:16:in `call'
+/usr/local/bundle/gems/actions_importer-1.1.16912/lib/valet/adapters/provider_resolver.rb:26:in `call'
+/usr/local/bundle/gems/actions_importer-1.1.16912/lib/valet/services/extract_file.rb:11:in `call'
+/usr/local/bundle/gems/actions_importer-1.1.16912/lib/valet/services/azure_devops/pipeline/extract_templates.rb:200:in `block (3 levels) in extract_included_files'
 /usr/local/bundle/gems/actions_importer-1.1.16912/lib/valet/services/azure_devops/pipeline/extract_templates.rb:190:in `map'
 /usr/local/bundle/gems/actions_importer-1.1.16912/lib/valet/services/azure_devops/pipeline/extract_templates.rb:190:in `block (2 levels) in extract_included_files'
 /usr/local/bundle/gems/actions_importer-1.1.16912/lib/valet/services/azure_devops/pipeline/extract_templates.rb:187:in `map'

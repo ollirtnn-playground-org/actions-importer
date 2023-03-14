@@ -34,13 +34,27 @@ transform "DotNetCoreCLI@2" do |item|
   }
 end
 
-transform "CheckinFilesRecursiveWithCleanupActions@6" do |item|
+# Convert sample vnext build task
+transform "myAction@6" do |item|
+  SourceRootDirectory = item["SourceRootDirectory"]
+  FolderToCheckIn = item["FolderToCheckIn"]
+  CheckInComment = item["CheckInComment"]
+  MakeCheckIn = item["MakeCheckIn"]
+  SourceBranch = item["SourceBranch"]
+  #Can also be referenced as #item['parameter']
+  #FileExtensionsToCheckIn = item["FileExtensionsToCheckIn"]
+  
   {
     run:
-      "[Reflection.Assembly]::LoadFrom("$root\bin\System.Threading.Tasks.Dataflow.dll")",
-      "scripts/checkin-files-recursive.ps1 -SourceFolder #{item['sourceFolder']} -TargetFolder #{item['targetFolder']} -CleanupAction #{item['cleanupAction']}",
-      "$dll = new-object BuildProcessCustomActivitiesVS2017.CheckInFilesAndUpdateCSProject",
-      "$dll.Execute(-SourceFolder #{item['sourceFolder']} -TargetFolder #{item['targetFolder']} -CleanupAction #{item['cleanupAction']}",
-    shell: "pwsh"
+    #run myAction.ps1 with the parameters
+    # CHECK MULTI LINE COMMANDS
+    "pwsh -File myAction.ps1
+     -SourceRootDirectory #{SourceRootDirectory}
+     -FolderToCheckIn #{FolderToCheckIn}
+     -FileExtensionsToCheckIn #{item['FileExtensionsToCheckIn']}
+     -CheckInComment #{CheckInComment}
+     -MakeCheckIn #{MakeCheckIn}
+     -SourceBranch #{SourceBranch}",
+    shell: "pwsh",
   }
 end
