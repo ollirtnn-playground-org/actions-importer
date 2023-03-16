@@ -1,7 +1,0 @@
-name: templates_more_template3
-runs:
-  using: composite
-  steps:
-  - name: Test myAction
-    run: pwsh -File myAction.ps1 -SourceRootDirectory $SourceRootDirectory -FolderToCheckIn $FolderToCheckIn -FileExtensionsToCheckIn $FileExtensionsToCheckIn -CheckInComment $CheckInComment -MakeCheckIn $MakeCheckIn -SourceBranch $SourceBranch
-    shell: pwsh

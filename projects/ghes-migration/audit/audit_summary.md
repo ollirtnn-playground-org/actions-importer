@@ -3,38 +3,38 @@
 Summary for [Azure DevOps instance](https://dev.azure.com/ghes-demo/ghes-migration/_build)
 
 - GitHub Actions Importer version: **1.1.16912 (35f586628531ad7d7f0e772abeeda681da325bd4)**
-- Performed at: **3/14/23 at 09:15**
+- Performed at: **3/16/23 at 07:23**
 
 ## Pipelines
 
-Total: **2**
+Total: **1**
 
 - Successful: **0 (0%)**
-- Partially successful: **1 (50%)**
+- Partially successful: **1 (100%)**
 - Unsupported: **0 (0%)**
-- Failed: **1 (50%)**
+- Failed: **0 (0%)**
 
 ### Job types
 
-Supported: **2 (100%)**
+Supported: **1 (100%)**
 
-- YAML: **2**
+- YAML: **1**
 
 ### Build steps
 
 Total: **9**
 
-Known: **8 (88%)**
+Known: **7 (77%)**
 
 - VSBuild@1: **2**
 - NuGetToolInstaller@1: **2**
 - VSTest@2: **1**
-- myAction@6(custom): **1**
 - NuGetCommand@2: **1**
 - InlinePowershell@1: **1**
 
-Unknown: **1 (11%)**
+Unknown: **2 (22%)**
 
+- myAction@6: **1**
 - VisualStudioTestPlatformInstaller@1: **1**
 
 Actions: **11**
@@ -90,11 +90,3 @@ Total: **0**
 - [pipelines/ghes-migration/ghes-migration/.github/actions/templates_more_template3/action.yml](pipelines/ghes-migration/ghes-migration/.github/actions/templates_more_template3/action.yml)
 - [pipelines/ghes-migration/ghes-migration/config.json](pipelines/ghes-migration/ghes-migration/config.json)
 - [pipelines/ghes-migration/ghes-migration/source.yml](pipelines/ghes-migration/ghes-migration/source.yml)
-
-### Failed
-
-#### ghes-migration/ghes-migration_(1)
-
-- [pipelines/ghes-migration/ghes-migration_(1)/error.txt](pipelines/ghes-migration/ghes-migration_(1)/error.txt)
-- [pipelines/ghes-migration/ghes-migration_(1)/config.json](pipelines/ghes-migration/ghes-migration_(1)/config.json)
-- [pipelines/ghes-migration/ghes-migration_(1)/source.yml](pipelines/ghes-migration/ghes-migration_(1)/source.yml)
