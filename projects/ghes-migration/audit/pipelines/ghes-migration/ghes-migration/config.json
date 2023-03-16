@@ -2,15 +2,20 @@
   "triggers": [
     {
       "branchFilters": [
-        "+none"
+        "+main",
+        "+feature/**"
       ],
       "pathFilters": [
-
+        "+demo-app/*",
+        "+templates/*"
       ],
       "settingsSourceType": 2,
       "batchChanges": false,
       "maxConcurrentBuildsPerBranch": 1,
-      "triggerType": "continuousIntegration"
+      "triggerType": "continuousIntegration",
+      "tagFilters": [
+
+      ]
     }
   ],
   "properties": {

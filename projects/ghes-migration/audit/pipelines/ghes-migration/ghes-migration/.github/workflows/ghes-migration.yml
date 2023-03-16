@@ -2,23 +2,31 @@ name: ghes-migration/ghes-migration
 on:
   push:
     branches:
-    - none
+    - main
+    - feature/**
+    paths:
+    - demo-app/*
+    - templates/*
 env:
   buildConfiguration: Release
   buildPlatform: Any CPU
+  isMain: "$[eq(variables['Build.SourceBranch'], 'refs/heads/main')]"
+  serviceUrl: https://www.google.com
   solution: "**/*.sln"
+  testPlatformVersion: 17.5.0
 jobs:
-  Build:
+  Build-Build:
+    name: Build
     runs-on: ubuntu-latest
+    env:
+      RunSomething: false
+    if: success() && startsWith(github.ref, '')
     steps:
     - name: checkout
       uses: actions/checkout@v3.3.0
-#     # This item has no matching transformer
-#     - task: VisualStudioTestPlatformInstaller@1
-#       displayName: Visual Studio Test Platform Installer
-#       inputs:
-#         versionSelector: specificVersion
-#         testPlatformVersion: 17.5.0
+    - name: Visual Studio Test Platform Installer
+      run: dotnet add package Microsoft.TestPlatform --version ${{ env.testPlatformVersion }}
+      shell: pwsh
     - uses: nuget/setup-nuget@v1.1.1
     - run: nuget restore ${{ env.solution }}
     - name: install msbuild
@@ -34,6 +42,9 @@ jobs:
         searchFolder: "${{ github.workspace }}"
         platform: "${{ env.buildPlatform }}"
     - uses: "./.github/actions/templates_template1"
-    - uses: "./.github/actions/templates_template2"
-      with:
-        TargetBranch: main
+  templates_template2:
+    name: templates_template2
+    needs: Build-Build
+    uses: "./.github/workflows/templates_template2.yml"
+    with:
+      TargetBranch: main

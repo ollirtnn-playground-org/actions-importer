@@ -4,8 +4,7 @@ ghes-migration/ghes-migration,nuget/setup-nuget@v1.1.1,projects/ghes-migration/a
 ghes-migration/ghes-migration,microsoft/setup-msbuild@v1.3.1,projects/ghes-migration/audit/pipelines/ghes-migration/ghes-migration/.github/workflows/ghes-migration.yml
 ghes-migration/ghes-migration,microsoft/vstest-action@v1.0.0,projects/ghes-migration/audit/pipelines/ghes-migration/ghes-migration/.github/workflows/ghes-migration.yml
 ghes-migration/ghes-migration,./.github/actions/templates_template1,projects/ghes-migration/audit/pipelines/ghes-migration/ghes-migration/.github/workflows/ghes-migration.yml
-ghes-migration/ghes-migration,./.github/actions/templates_template2,projects/ghes-migration/audit/pipelines/ghes-migration/ghes-migration/.github/workflows/ghes-migration.yml
-ghes-migration/ghes-migration,./.github/actions/templates_more_template3,projects/ghes-migration/audit/pipelines/ghes-migration/ghes-migration/.github/workflows/ghes-migration.yml
+ghes-migration/ghes-migration,./.github/workflows/templates_template2.yml,projects/ghes-migration/audit/pipelines/ghes-migration/ghes-migration/.github/workflows/ghes-migration.yml
 
 Pipeline,Secret,File path
 

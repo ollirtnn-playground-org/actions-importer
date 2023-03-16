@@ -58,3 +58,13 @@ transform "myAction@6" do |item|
     shell: "pwsh",
   }
 end
+
+# convert VisualStudioTestPlatformInstaller@1 task to .NET CLI command
+# shell pwsh
+transform "VisualStudioTestPlatformInstaller@1" do |item|
+  {
+    run:   "dotnet add package Microsoft.TestPlatform --version #{item['testPlatformVersion']}",
+    shell: "pwsh",
+  }
+end
+
