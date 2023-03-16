@@ -1,6 +1,6 @@
 
 # This transformer is used to convert the Azure Pipelines YAML file to GitHub Actions YAML file
-# to run use: --custom-transformer transformers.rb
+# to run use: --custom-transformers transformers.rb
 # like: gh actions-importer dry-run azure-devops pipeline --pipeline-id 2 --output-dir tmp/dry-run --custom-transformers transformers.rb
 
 # Convert environment variables
@@ -47,13 +47,13 @@ transform "myAction@6" do |item|
   {
     run:
     #run myAction.ps1 with the parameters
-    # CHECK MULTI LINE COMMANDS
-    "pwsh -File myAction.ps1
-     -SourceRootDirectory #{SourceRootDirectory}
-     -FolderToCheckIn #{FolderToCheckIn}
-     -FileExtensionsToCheckIn #{item['FileExtensionsToCheckIn']}
-     -CheckInComment #{CheckInComment}
-     -MakeCheckIn #{MakeCheckIn}
+    # CHECK MULTI LINE COMMANDS AND SCRIPT DIRECTORY
+    "./myAction.ps1
+     -SourceRootDirectory #{SourceRootDirectory} `
+     -FolderToCheckIn #{FolderToCheckIn} `
+     -FileExtensionsToCheckIn #{item['FileExtensionsToCheckIn']} `
+     -CheckInComment #{CheckInComment} `
+     -MakeCheckIn #{MakeCheckIn} `
      -SourceBranch #{SourceBranch}",
     shell: "pwsh",
   }

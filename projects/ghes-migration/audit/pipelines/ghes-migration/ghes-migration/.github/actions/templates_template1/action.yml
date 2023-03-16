@@ -1,5 +1,0 @@
-name: templates_template1
-runs:
-  using: composite
-  steps:
-  - uses: nuget/setup-nuget@v1.1.1
