@@ -1,0 +1,61 @@
+name: ghes-migration/ghes-migration
+on:
+  push:
+    branches:
+    - main
+    - feature/**
+    paths:
+    - demo-app/**
+    - templates/**
+env:
+  buildConfiguration: Release
+  buildPlatform: Any CPU
+  isMain: "$[eq(variables['build.sourceBranch'], 'refs/heads/main')]"
+  serviceUrl: https://www.google.com
+  solution: "**/*.sln"
+  testPlatformVersion: 17.5.0
+jobs:
+  Build-Build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      RunSomething: false
+    if: success() && startsWith(github.ref, '')
+    steps:
+    - uses: azure/login@v1.4.6
+      with:
+        creds: "${{ secrets.AZURE_CREDENTIALS }}"
+    - name: Get secrets from Azure Key Vault
+      shell: bash
+      run: |-
+        for secret_name in super-secret-psw; do
+          secret_value=$(az keyvault secret show --vault-name "wavesplitter-kv" --name $secret_name --query value -o tsv)
+          echo "::add-mask::$secret_value"
+          echo "$secret_name=$secret_value" >> $GITHUB_ENV
+        done
+    - name: checkout
+      uses: actions/checkout@v3.3.0
+    - name: Visual Studio Test Platform Installer
+      run: dotnet add package Microsoft.TestPlatform --version ${{ env.testPlatformVersion }}
+      shell: pwsh
+    - uses: nuget/setup-nuget@v1.1.1
+    - run: nuget restore ${{ env.solution }}
+    - name: install msbuild
+      uses: microsoft/setup-msbuild@v1.3.1
+    - name: run msbuild
+      run: msbuild ${{ env.solution }} /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="${{ runner.temp }}\WebApp.zip" /p:DeployIisAppPath="Default Web Site" -p:Configuration=${{ env.buildConfiguration }} -p:Platform="${{ env.buildPlatform }}"
+    - uses: microsoft/vstest-action@v1.0.0
+      with:
+        testAssembly: |-
+          **\*test*.dll
+          !**\*TestAdapter.dll
+          !**\obj\**
+        searchFolder: "${{ github.workspace }}"
+        platform: "${{ env.buildPlatform }}"
+    - uses: "./.github/actions/templates_template1"
+  templates_template2:
+    name: templates_template2
+    needs: Build-Build
+    uses: "./.github/workflows/templates_template2.yml"
+    with:
+      TargetBranch: main
