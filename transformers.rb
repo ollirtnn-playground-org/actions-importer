@@ -44,11 +44,11 @@ transform "myAction@6" do |item|
   #Can also be referenced as #item['parameter']
   #FileExtensionsToCheckIn = item["FileExtensionsToCheckIn"]
   
+#run myAction.ps1 with the parameters
+# CHECK MULTI LINE COMMANDS AND SCRIPT DIRECTORY
   {
     run:
-    #run myAction.ps1 with the parameters
-    # CHECK MULTI LINE COMMANDS AND SCRIPT DIRECTORY
-    "./myAction.ps1
+    "./myAction.ps1 `
      -SourceRootDirectory #{SourceRootDirectory} `
      -FolderToCheckIn #{FolderToCheckIn} `
      -FileExtensionsToCheckIn #{item['FileExtensionsToCheckIn']} `
