@@ -1,0 +1,14 @@
+name: templates_more_template3
+runs:
+  using: composite
+  steps:
+  - name: Test myAction
+    run: |-
+      ./myAction.ps1 `
+           -SourceRootDirectory ${{ github.workspace }} `
+           -FolderToCheckIn ${{ github.workspace }}\demo-app\ `
+           -FileExtensionsToCheckIn *.md `
+           -CheckInComment generatedmdfiles `
+           -MakeCheckIn false `
+           -SourceBranch ${{ github.ref }}
+    shell: pwsh
