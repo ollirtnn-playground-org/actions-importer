@@ -17,7 +17,9 @@ env:
 jobs:
   Build-Build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on:
+      - self-hosted
+      - my-runnergroup
     env:
       RunSomething: false
     if: success() && startsWith(github.ref, '')
