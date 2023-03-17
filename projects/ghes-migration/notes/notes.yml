@@ -1,0 +1,86 @@
+## This is a note file of the projects transformed ymnl file
+
+# ADO pipeline yml file:
+# /workspaces/actions-importer/projects/ghes-migration/audit/pipelines/ghes-migration/ghes-migration/source.yml
+
+# Azure Devops does not have name in the pipeline file so converter will use:
+# project/repository
+name: ghes-migration/ghes-migration
+on:
+  push:
+    branches:
+      - main
+      - feature/**
+    paths:
+      - demo-app/**
+      - templates/**
+
+# POOL is missing and runners are default(?) values.
+# Maybe transformers file can be used or runners must be handled manually.
+
+# Environment groups are not supported in GitHub Actions! Variables in environment groups are added to the pipeline variables
+# Secrets are not added to the pipeline variables. They are added to the GitHub secrets.
+env:
+  buildConfiguration: Release
+  buildPlatform: Any CPU
+  isMain: "${{ github.ref == 'refs/heads/main' }}"
+  serviceUrl: https://www.google.com #This is from group
+  solution: "**/*.sln"
+  testPlatformVersion: 17.5.0 #This is from group
+
+# ADO stages are converted to GitHub jobs
+jobs:
+  Build-Build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      RunSomething: false
+    if: success() && startsWith(github.ref, '')
+    steps:
+      # These steps log in to Azure and get secrets from Azure Key Vault and add them to the GitHub secrets ($GITHUB_ENV)
+      # secrets.AZURE_CREDENTIALS is a GitHub secret that contains the Azure credentials, THIS IS ADDED MANUALLY!
+      - uses: azure/login@v1.4.6
+        with:
+          creds: "${{ secrets.AZURE_CREDENTIALS }}" # ADD MANUALLY
+      - name: Get secrets from Azure Key Vault
+        shell: bash
+        run: |-
+          for secret_name in super-secret-psw; do
+            secret_value=$(az keyvault secret show --vault-name "wavesplitter-kv" --name $secret_name --query value -o tsv)
+            echo "::add-mask::$secret_value"
+            echo "$secret_name=$secret_value" >> $GITHUB_ENV
+          done
+      #Checkout is done automatically by GitHub Actions
+      # NOTE: If you have a checkout step in your pipeline, it might come two times in the converted file.
+      # like: ./dry-run/pipelines/ghes-migration/ghes-migration/.github/workflows/templates_template2.yml
+      - name: checkout
+        uses: actions/checkout@v3.3.0
+      # Github actions does not have VisualStudioTestPlatformInstaller task.
+      # task is transformed in transformers.rb
+      - name: Visual Studio Test Platform Installer
+        run: dotnet add package Microsoft.TestPlatform --version ${{ env.testPlatformVersion }}
+        shell: pwsh
+      - uses: nuget/setup-nuget@v1.1.1
+      - run: nuget restore ${{ env.solution }}
+      - name: install msbuild
+        uses: microsoft/setup-msbuild@v1.3.1
+      - name: run msbuild
+        run: msbuild ${{ env.solution }} /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="${{ runner.temp }}\WebApp.zip" /p:DeployIisAppPath="Default Web Site" -p:Configuration=${{ env.buildConfiguration }} -p:Platform="${{ env.buildPlatform }}"
+      - uses: microsoft/vstest-action@v1.0.0
+        with:
+          testAssembly: |-
+            **\*test*.dll
+            !**\*TestAdapter.dll
+            !**\obj\**
+          searchFolder: "${{ github.workspace }}"
+          platform: "${{ env.buildPlatform }}"
+      # Template files are added to the workflow file and actions are added to the .github/actions folder
+      - uses: "./.github/actions/templates_template1" # naming: folder_filename
+
+  # Another example of a template file. This is a reusable workflow file.
+  templates_template2:
+    name: templates_template2 # naming: folder_filename
+    needs: Build-Build # This is the name of the job that this job depends on
+    uses: "./.github/workflows/templates_template2.yml"
+    with:
+      TargetBranch: main
