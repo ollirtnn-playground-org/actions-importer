@@ -7,6 +7,7 @@
 # first parameter is the name of the environment variable in Azure Pipelines
 # second parameter is the updated value of the environment variable to be used in GitHub Actions
 env "BUILDCONFIGURATION", "Debug"
+env "isMain", "${{ github.ref == 'refs/heads/main' }}"
 
 # Convert runners
 # first parameter is the name of the runner in Azure Pipelines
@@ -67,4 +68,3 @@ transform "VisualStudioTestPlatformInstaller@1" do |item|
     shell: "pwsh",
   }
 end
-

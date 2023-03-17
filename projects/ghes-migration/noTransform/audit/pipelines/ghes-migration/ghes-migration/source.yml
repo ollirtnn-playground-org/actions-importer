@@ -1,0 +1,72 @@
+---
+trigger:
+  branches:
+    include:
+    - main
+    - feature/**
+  paths:
+    include:
+    - demo-app/**
+    - templates/**
+pool:
+  name: Azure Pipelines
+  vmImage: windows-latest
+  demands:
+  - msbuild
+  - vstest
+variables:
+- name: solution
+  value: "**/*.sln"
+- name: buildPlatform
+  value: Any CPU
+- name: buildConfiguration
+  value: Release
+- name: isMain
+  value: "$[eq(variables['build.sourceBranch'], 'refs/heads/main')]"
+- group: build-vars
+- group: azure-kv
+stages:
+- stage: Build
+  displayName: Build jobs
+  dependsOn: []
+  variables:
+    RunSomething: false
+  condition: |
+    and(
+      succeeded(),
+      startsWith(variables['build.sourceBranch'], '')
+    )
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - task: VisualStudioTestPlatformInstaller@1
+      displayName: Visual Studio Test Platform Installer
+      inputs:
+        versionSelector: specificVersion
+        testPlatformVersion: "$(testPlatformVersion)"
+    - task: NuGetToolInstaller@1
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: "$(solution)"
+    - task: VSBuild@1
+      inputs:
+        solution: "$(solution)"
+        msbuildArgs: /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true
+          /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip"
+          /p:DeployIisAppPath="Default Web Site"
+        platform: "$(buildPlatform)"
+        configuration: "$(buildConfiguration)"
+    - task: VSTest@2
+      inputs:
+        platform: "$(buildPlatform)"
+        configuration: "$(buildConfiguration)"
+    - template: templates/template1.yml
+- stage: run_template2
+  displayName: run template2
+  dependsOn:
+  - build
+  jobs:
+  - template: templates/template2.yml
+    parameters:
+      TargetBranch: main

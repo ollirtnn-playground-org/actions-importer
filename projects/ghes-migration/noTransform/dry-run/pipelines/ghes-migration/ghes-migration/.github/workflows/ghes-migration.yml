@@ -10,7 +10,7 @@ on:
 env:
   buildConfiguration: Release
   buildPlatform: Any CPU
-  isMain: "${{ github.ref == 'refs/heads/main' }}"
+  isMain: "$[eq(variables['build.sourceBranch'], 'refs/heads/main')]"
   serviceUrl: https://www.google.com
   solution: "**/*.sln"
   testPlatformVersion: 17.5.0
@@ -35,9 +35,12 @@ jobs:
         done
     - name: checkout
       uses: actions/checkout@v3.3.0
-    - name: Visual Studio Test Platform Installer
-      run: dotnet add package Microsoft.TestPlatform --version ${{ env.testPlatformVersion }}
-      shell: pwsh
+#     # This item has no matching transformer
+#     - task: VisualStudioTestPlatformInstaller@1
+#       displayName: Visual Studio Test Platform Installer
+#       inputs:
+#         versionSelector: specificVersion
+#         testPlatformVersion: "${{ env.testPlatformVersion }}"
     - uses: nuget/setup-nuget@v1.1.1
     - run: nuget restore ${{ env.solution }}
     - name: install msbuild
