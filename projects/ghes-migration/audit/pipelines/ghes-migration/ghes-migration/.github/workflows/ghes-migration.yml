@@ -10,14 +10,14 @@ on:
 env:
   buildConfiguration: Release
   buildPlatform: Any CPU
-  isMain: "$[eq(variables['build.sourceBranch'], 'refs/heads/main')]"
+  isMain: "${{ github.ref == 'refs/heads/main' }}"
   serviceUrl: https://www.google.com
   solution: "**/*.sln"
   testPlatformVersion: 17.5.0
 jobs:
   Build-Build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       RunSomething: false
     if: success() && startsWith(github.ref, '')
@@ -52,6 +52,10 @@ jobs:
           !**\obj\**
         searchFolder: "${{ github.workspace }}"
         platform: "${{ env.buildPlatform }}"
+    - name: Set variable HasChanges
+      if: and(succeeded()), ne(github.event_name, 'pullrequest'))()
+      run: Write-Host "##vso[task.setvariable variable=HasChanges]true"
+      shell: powershell
     - uses: "./.github/actions/templates_template1"
   templates_template2:
     name: templates_template2

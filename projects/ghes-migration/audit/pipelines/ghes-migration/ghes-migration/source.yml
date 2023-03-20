@@ -61,6 +61,11 @@ stages:
       inputs:
         platform: "$(buildPlatform)"
         configuration: "$(buildConfiguration)"
+    - powershell: 'Write-Host "##vso[task.setvariable variable=HasChanges]true"
+
+        '
+      displayName: Set variable HasChanges
+      condition: and(succeeded()), ne(variables['Build.Reason'], 'PullRequest'))
     - template: templates/template1.yml
 - stage: run_template2
   displayName: run template2
