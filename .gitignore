@@ -6,3 +6,14 @@ tmp/audit/log
 tmp/migrate/log
 tmp/dry-run-2/log/
 projects/**/log/
+
+myApp/myConsoleApp/.vs/myConsoleApp/v17/TestStore/0/000.testlog
+myApp/myConsoleApp/.vs/myConsoleApp/v17/TestStore/0/testlog.manifest
+myApp/myConsoleApp/BankTests/obj/Debug/net6.0/BankTests.assets.cache
+myApp/myConsoleApp/BankTests/obj/Debug/net6.0/BankTests.GeneratedMSBuildEditorConfig.editorconfig
+myApp/myConsoleApp/.vs/myConsoleApp/v17/.suo
+myApp/myConsoleApp/.vs/myConsoleApp/v17/.futdcache.v2
+myApp/myConsoleApp/BankTests/obj/Debug/net6.0/BankTests.csproj.AssemblyReference.cache
+myApp/**/*.cache
+myApp/**/*testlog*
+
