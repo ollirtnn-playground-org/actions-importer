@@ -6,3 +6,5 @@ tmp/audit/log
 tmp/migrate/log
 tmp/dry-run-2/log/
 projects/**/log/
+
+
