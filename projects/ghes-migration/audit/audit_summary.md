@@ -3,7 +3,7 @@
 Summary for [Azure DevOps instance](https://dev.azure.com/ghes-demo/ghes-migration/_build)
 
 - GitHub Actions Importer version: **1.1.16912 (35f586628531ad7d7f0e772abeeda681da325bd4)**
-- Performed at: **3/20/23 at 08:47**
+- Performed at: **3/21/23 at 14:04**
 
 ## Pipelines
 
@@ -22,23 +22,24 @@ Supported: **1 (100%)**
 
 ### Build steps
 
-Total: **11**
+Total: **12**
 
-Known: **11 (100%)**
+Known: **12 (100%)**
 
 - NuGetToolInstaller@1: **2**
 - VSBuild@1: **2**
 - checkout: **1**
+- PowerShell@2: **1**
 - powershell: **1**
-- InlinePowershell@1: **1**
 - myAction@6(custom): **1**
+- InlinePowershell@1: **1**
 - VSTest@2: **1**
 - NuGetCommand@2: **1**
 - VisualStudioTestPlatformInstaller@1(custom): **1**
 
-Actions: **16**
+Actions: **17**
 
-- run: **5**
+- run: **6**
 - actions/checkout@v3.3.0: **3**
 - nuget/setup-nuget@v1.1.1: **2**
 - ./.github/actions/templates_template1: **1**
