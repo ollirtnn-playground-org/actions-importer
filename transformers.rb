@@ -13,6 +13,7 @@ env "isMain", "${{ github.ref == 'refs/heads/main' }}"
 # first parameter is the name of the runner in Azure Pipelines
 # second parameter is the updated value of the runner to be used in GitHub Actions
 runner :default , "my-runnergroup"
+#shell :default , "pwsh"
 
 # Convert DotnetCoreCLI@2 tasks to support parameters that are glob patterns and run the command for each project
 # glob patterns are like *.csproj or **/*.csproj

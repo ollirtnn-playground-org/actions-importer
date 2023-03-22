@@ -3,3 +3,7 @@ runs:
   using: composite
   steps:
   - uses: nuget/setup-nuget@v1.1.1
+  - name: powershell parser
+    if: success() && (env.isMain == true || github.event_name == 'PullRequest')
+    run: " argument1"
+    shell: powershell
